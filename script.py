@@ -6,6 +6,7 @@
 
 import requests  
 import datetime
+import os
 
 class BotHandler:
 
@@ -37,12 +38,14 @@ class BotHandler:
         return last_update
 
 ## TOKEN - INSERT YOUR TOKEN HERE
-token = "506193344:AAG_NzmOYrKNYhNULHWVV1HHmu-o-zC29fY"
+token = os.environ.get('BOT_KEY', "")
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 
-def main():  
+def main():
+    if greet_bot.token == "":
+        exit()
     new_offset = None
     today = now.day
     hour = now.hour
